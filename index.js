@@ -13,9 +13,8 @@ todoButton.addEventListener("click", function (e) {
   for (let i = 0; i < allTodos.length; i++) {
     let node = document.createElement("li");
     nodeText = allTodos[i];
+    node.setAttribute("id", new Date().getUTCMilliseconds());
     node.append(nodeText);
     ul.appendChild(node);
   }
 });
-
-// console.log(allTodos);
