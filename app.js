@@ -15,7 +15,7 @@ function submitForm(e) {
   e.preventDefault();
   // creating new li
   const newLi = document.createElement("li");
-  const newTodo = "hello";
+  const newTodo = todoInput.value;
   newLi.append(newTodo);
   // console.log(newLi);
 
