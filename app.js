@@ -45,13 +45,19 @@ function submitForm(e) {
 }
 
 function workDone(e) {
-  console.log("work done");
-  console.log(e.target);
+  // console.log("work done");
+  // console.log(e.target);
   const doneTodo = e.target;
+  // target the parent element and underline it
   doneTodo.parentElement.style.textDecoration = "line-through";
+  // disabled the button when the work done
   doneTodo.disabled = true;
 }
 
 function notWantTodo(e) {
   console.log("deleting todo");
+  const deleteTodo = e.target;
+  // delete the particular todo
+  deleteTodo.parentElement.remove();
+  // deleteTodo.remove();
 }
