@@ -4,6 +4,7 @@ console.log("script loaded");
 const todoInput = document.querySelector("#todoForm");
 const todoButton = document.querySelector("#todoSubmitButton");
 const todoList = document.querySelector("#ul");
+const noTodoDisplay = document.querySelector("#noTodoDisplay");
 
 // all the Event Listener
 console.log(todoButton);
@@ -13,6 +14,10 @@ todoButton.addEventListener("click", submitForm);
 
 function submitForm(e) {
   e.preventDefault();
+  // remove the h1 from the display
+  noTodoDisplay.remove();
+  // console.log();
+
   // creating new li
   const newLi = document.createElement("li");
   const newTodo = todoInput.value;
