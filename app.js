@@ -36,4 +36,6 @@ function submitForm(e) {
   // adding new li to ul
   todoList.append(newLi);
   // console.log(newLi);
+
+  todoInput.value = "";
 }
