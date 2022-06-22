@@ -38,4 +38,20 @@ function submitForm(e) {
   // console.log(newLi);
 
   todoInput.value = "";
+
+  // adding event listener to buttons
+  todoDone.addEventListener("click", workDone);
+  trash.addEventListener("click", notWantTodo);
+}
+
+function workDone(e) {
+  console.log("work done");
+  console.log(e.target);
+  const doneTodo = e.target;
+  doneTodo.parentElement.style.textDecoration = "line-through";
+  doneTodo.disabled = true;
+}
+
+function notWantTodo(e) {
+  console.log("deleting todo");
 }
