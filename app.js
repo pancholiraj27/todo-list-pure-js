@@ -84,23 +84,27 @@ function notWantTodo(e) {
   const deleteTodo = e.target;
   // delete the particular todo
   deleteTodo.parentElement.remove();
-  // deleteTodo.remove();
+  removeLocalTodos(deleteTodo);
 }
 
-// function editTodo(e) {
-//   // console.log("todo editing", e.target.parentElement.firstChild);
-//   todoButton.innerText = "Edit";
-//   let oldTodoInput = e.target.parentElement.firstChild.textContent;
-//   todoInput.value = oldTodoInput;
-//   todoInput.value = oldTodoInput + todoInput.value;
-//   // console.log(todoInput.value);
+/*
+function editTodo(e) {
+  // console.log("todo editing", e.target.parentElement.firstChild);
+  todoButton.innerText = "Edit";
+  let oldTodoInput = e.target.parentElement.firstChild.textContent;
+  todoInput.value = oldTodoInput;
+  todoInput.value = oldTodoInput + todoInput.value;
+  // console.log(todoInput.value);
 
-//   // const newValue = e.target.parentElement.firstChild.textContent;
-//   // console.log(todoInput.value);
-//   // console.log((e.target.parentElement.firstChild.textContent = "namaste"));
+  // const newValue = e.target.parentElement.firstChild.textContent;
+  // console.log(todoInput.value);
+  // console.log((e.target.parentElement.firstChild.textContent = "namaste"));
 
-//   // todoButton.innerText = "Add Todo";
-// }
+  // todoButton.innerText = "Add Todo";
+}
+*/
+
+// saving data to local storage
 
 function saveLocalTodo(todo) {
   // is there any todo;
@@ -113,12 +117,17 @@ function saveLocalTodo(todo) {
   todos.push(todo);
   localStorage.setItem("todos", JSON.stringify(todos));
 }
-function getTodos() {
+
+// get data from local storage
+
+function getTodos(e) {
   // is there any todo;
+
   let todos;
   if (localStorage.getItem("todos") === null) {
     todos = [];
   } else {
+    noTodoDisplay.remove();
     todos = JSON.parse(localStorage.getItem("todos"));
   }
   todos.forEach(function (todo) {
@@ -145,5 +154,24 @@ function getTodos() {
 
     // adding new li to ul
     todoList.append(newLi);
+
+    // adding event listener to buttons
+    todoDone.addEventListener("click", workDone);
+    trash.addEventListener("click", notWantTodo);
   });
+}
+
+// remove data from local storage
+
+function removeLocalTodos(todo) {
+  let todos;
+  if (localStorage.getItem("todos") === null) {
+    todos = [];
+  } else {
+    todos = JSON.parse(localStorage.getItem("todos"));
+  }
+  // const todoIndex = todo.children[0].innerText;
+  // todos.splice(todos.indexOf(todoIndex), 1);
+  // localStorage.setItem("todos", JSON.stringify(todos));
+  console.log(todo, "hello there");
 }
