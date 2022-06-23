@@ -84,7 +84,7 @@ function notWantTodo(e) {
   const deleteTodo = e.target;
   // delete the particular todo
   deleteTodo.parentElement.remove();
-  removeLocalTodos(deleteTodo);
+  removeLocalTodos(deleteTodo.parentElement);
 }
 
 /*
@@ -170,8 +170,8 @@ function removeLocalTodos(todo) {
   } else {
     todos = JSON.parse(localStorage.getItem("todos"));
   }
-  // const todoIndex = todo.children[0].innerText;
-  // todos.splice(todos.indexOf(todoIndex), 1);
-  // localStorage.setItem("todos", JSON.stringify(todos));
-  console.log(todo, "hello there");
+  const todoIndex = todo.children[0].innerText;
+  todos.splice(todos.indexOf(todoIndex), 1);
+  localStorage.setItem("todos", JSON.stringify(todos));
+  // console.log(todo, "hello there");
 }
