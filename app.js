@@ -1,6 +1,9 @@
 console.log("script loaded");
 
+localStorage.setItem("name", "raj");
+
 // all the selectors
+document.addEventListener("DOMContentLoaded", getTodos);
 const todoInput = document.querySelector("#todoForm");
 const todoButton = document.querySelector("#todoSubmitButton");
 const todoList = document.querySelector("#ul");
@@ -25,6 +28,10 @@ function submitForm(e) {
     newLi.append(newTodo);
     // console.log(newLi);
 
+    // add todo to local storage
+
+    saveLocalTodo(todoInput.value);
+
     // adding done button
     const todoDone = document.createElement("button");
     todoDone.innerText = "✅";
@@ -40,11 +47,11 @@ function submitForm(e) {
     newLi.append(trash);
 
     // editing todo button
-    const edit = document.createElement("button");
-    edit.innerText = "✏️";
-    // creating class name of button
-    edit.setAttribute("class", "editWork");
-    newLi.append(edit);
+    // const edit = document.createElement("button");
+    // edit.innerText = "✏️";
+    // // creating class name of button
+    // edit.setAttribute("class", "editWork");
+    // newLi.append(edit);
 
     // adding new li to ul
     todoList.append(newLi);
@@ -94,3 +101,49 @@ function notWantTodo(e) {
 
 //   // todoButton.innerText = "Add Todo";
 // }
+
+function saveLocalTodo(todo) {
+  // is there any todo;
+  let todos;
+  if (localStorage.getItem("todos") === null) {
+    todos = [];
+  } else {
+    todos = JSON.parse(localStorage.getItem("todos"));
+  }
+  todos.push(todo);
+  localStorage.setItem("todos", JSON.stringify(todos));
+}
+function getTodos() {
+  // is there any todo;
+  let todos;
+  if (localStorage.getItem("todos") === null) {
+    todos = [];
+  } else {
+    todos = JSON.parse(localStorage.getItem("todos"));
+  }
+  todos.forEach(function (todo) {
+    const newLi = document.createElement("li");
+    const newTodo = todo;
+    newLi.append(newTodo);
+    // console.log(newLi);
+
+    // add todo to local storage
+
+    // adding done button
+    const todoDone = document.createElement("button");
+    todoDone.innerText = "✅";
+    // creating class name of button
+    todoDone.setAttribute("class", "todoWorkDone");
+    newLi.append(todoDone);
+
+    // adding trash button
+    const trash = document.createElement("button");
+    trash.innerText = "❌";
+    // creating class name of button
+    trash.setAttribute("class", "trashWork");
+    newLi.append(trash);
+
+    // adding new li to ul
+    todoList.append(newLi);
+  });
+}
