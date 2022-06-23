@@ -47,11 +47,11 @@ function submitForm(e) {
     newLi.append(trash);
 
     // editing todo button
-    // const edit = document.createElement("button");
-    // edit.innerText = "✏️";
-    // // creating class name of button
-    // edit.setAttribute("class", "editWork");
-    // newLi.append(edit);
+    const edit = document.createElement("button");
+    edit.innerText = "✏️";
+    // creating class name of button
+    edit.setAttribute("class", "editWork");
+    newLi.append(edit);
 
     // adding new li to ul
     todoList.append(newLi);
@@ -63,10 +63,9 @@ function submitForm(e) {
     todoDone.addEventListener("click", workDone);
     trash.addEventListener("click", notWantTodo);
     edit.addEventListener("click", editTodo);
+  } else {
+    todoButton.addEventListener("click", editTodo);
   }
-  // else {
-  //   todoButton.addEventListener("click", editTodo);
-  // }
 }
 
 function workDone(e) {
@@ -87,22 +86,28 @@ function notWantTodo(e) {
   removeLocalTodos(deleteTodo.parentElement);
 }
 
-/*
 function editTodo(e) {
   // console.log("todo editing", e.target.parentElement.firstChild);
   todoButton.innerText = "Edit";
-  let oldTodoInput = e.target.parentElement.firstChild.textContent;
-  todoInput.value = oldTodoInput;
-  todoInput.value = oldTodoInput + todoInput.value;
-  // console.log(todoInput.value);
 
-  // const newValue = e.target.parentElement.firstChild.textContent;
   // console.log(todoInput.value);
-  // console.log((e.target.parentElement.firstChild.textContent = "namaste"));
+  const editNewTodo = todoInput.value;
 
-  // todoButton.innerText = "Add Todo";
+  const updatedTodo = e.target.parentElement.firstChild;
+  todoInput.value = e.target.parentElement.firstChild.textContent;
+  // console.log(updatedTodo);
+
+  todoButton.addEventListener("click", (e) => {
+    console.log("submiteed", todoInput.value);
+    const newTodoValue = todoInput.value;
+    // console.log((updatedTodo.innerText = "hello"));
+    console.log(updatedTodo);
+    updatedTodo.textContent = newTodoValue;
+    todoInput.value = "";
+    todoButton.innerText = "Add Todo";
+    // console.log("todoss", todoInput.value, editNewTodo);
+  });
 }
-*/
 
 // saving data to local storage
 
