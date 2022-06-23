@@ -91,21 +91,39 @@ function editTodo(e) {
   todoButton.innerText = "Edit";
 
   // console.log(todoInput.value);
-  const editNewTodo = todoInput.value;
+  // const editNewTodo = todoInput.value;
 
   const updatedTodo = e.target.parentElement.firstChild;
   todoInput.value = e.target.parentElement.firstChild.textContent;
+  const oldTodo = e.target.parentElement.firstChild;
   // console.log(updatedTodo);
 
   todoButton.addEventListener("click", (e) => {
-    console.log("submiteed", todoInput.value);
+    // console.log("submiteed", todoInput.value);
+
     const newTodoValue = todoInput.value;
-    // console.log((updatedTodo.innerText = "hello"));
-    console.log(updatedTodo);
     updatedTodo.textContent = newTodoValue;
-    todoInput.value = "";
+
+    // save to local storage
+
+    let todos;
+    if (localStorage.getItem("todos") === null) {
+      todos = [];
+    } else {
+      todos = JSON.parse(localStorage.getItem("todos"));
+    }
+    // todos.push(updatedTodo.textContent);
+    // localStorage.setItem("todos", JSON.stringify(todos));
+
+    console.log(todos);
+
+    todos.splice(todos.indexOf(oldTodo), 5, oldTodo.textContent);
+    localStorage.setItem("todos", JSON.stringify(todos));
+
     todoButton.innerText = "Add Todo";
+
     // console.log("todoss", todoInput.value, editNewTodo);
+    todoInput.value = "";
   });
 }
 
@@ -132,7 +150,7 @@ function getTodos(e) {
   if (localStorage.getItem("todos") === null) {
     todos = [];
   } else {
-    noTodoDisplay.remove();
+    // noTodoDisplay.remove();
     todos = JSON.parse(localStorage.getItem("todos"));
   }
   todos.forEach(function (todo) {
