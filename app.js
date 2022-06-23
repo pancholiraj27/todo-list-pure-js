@@ -7,46 +7,59 @@ const todoList = document.querySelector("#ul");
 const noTodoDisplay = document.querySelector("#noTodoDisplay");
 
 // all the Event Listener
-console.log(todoButton);
 todoButton.addEventListener("click", submitForm);
 
 // functions
 
 function submitForm(e) {
   e.preventDefault();
-  // remove the h1 from the display
-  noTodoDisplay.remove();
-  // console.log();
+  // console.log(e.target.innerText === "Add Todo");
+  if (e.target.innerText === "Add Todo") {
+    // remove the h1 from the display
+    noTodoDisplay.remove();
+    // console.log();
 
-  // creating new li
-  const newLi = document.createElement("li");
-  const newTodo = todoInput.value;
-  newLi.append(newTodo);
-  // console.log(newLi);
+    // creating new li
+    const newLi = document.createElement("li");
+    const newTodo = todoInput.value;
+    newLi.append(newTodo);
+    // console.log(newLi);
 
-  // adding done button
-  const todoDone = document.createElement("button");
-  todoDone.innerText = "✅";
-  // creating class name of button
-  todoDone.setAttribute("class", "todoWorkDone");
-  newLi.append(todoDone);
+    // adding done button
+    const todoDone = document.createElement("button");
+    todoDone.innerText = "✅";
+    // creating class name of button
+    todoDone.setAttribute("class", "todoWorkDone");
+    newLi.append(todoDone);
 
-  // adding trash button
-  const trash = document.createElement("button");
-  trash.innerText = "❌";
-  // creating class name of button
-  trash.setAttribute("class", "trashWork");
-  newLi.append(trash);
+    // adding trash button
+    const trash = document.createElement("button");
+    trash.innerText = "❌";
+    // creating class name of button
+    trash.setAttribute("class", "trashWork");
+    newLi.append(trash);
 
-  // adding new li to ul
-  todoList.append(newLi);
-  // console.log(newLi);
+    // editing todo button
+    const edit = document.createElement("button");
+    edit.innerText = "✏️";
+    // creating class name of button
+    edit.setAttribute("class", "editWork");
+    newLi.append(edit);
 
-  todoInput.value = "";
+    // adding new li to ul
+    todoList.append(newLi);
+    // console.log(newLi);
 
-  // adding event listener to buttons
-  todoDone.addEventListener("click", workDone);
-  trash.addEventListener("click", notWantTodo);
+    todoInput.value = "";
+
+    // adding event listener to buttons
+    todoDone.addEventListener("click", workDone);
+    trash.addEventListener("click", notWantTodo);
+    edit.addEventListener("click", editTodo);
+  }
+  // else {
+  //   todoButton.addEventListener("click", editTodo);
+  // }
 }
 
 function workDone(e) {
@@ -66,3 +79,18 @@ function notWantTodo(e) {
   deleteTodo.parentElement.remove();
   // deleteTodo.remove();
 }
+
+// function editTodo(e) {
+//   // console.log("todo editing", e.target.parentElement.firstChild);
+//   todoButton.innerText = "Edit";
+//   let oldTodoInput = e.target.parentElement.firstChild.textContent;
+//   todoInput.value = oldTodoInput;
+//   todoInput.value = oldTodoInput + todoInput.value;
+//   // console.log(todoInput.value);
+
+//   // const newValue = e.target.parentElement.firstChild.textContent;
+//   // console.log(todoInput.value);
+//   // console.log((e.target.parentElement.firstChild.textContent = "namaste"));
+
+//   // todoButton.innerText = "Add Todo";
+// }
